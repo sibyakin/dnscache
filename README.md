@@ -20,5 +20,5 @@ func main() {
 Especially for user-defined docker networks there's a really shitty workaround for updating resolv.conf. It was made into a separate function because it's only needed with user-defined networks or docker-compose usage (this is what actually made me do that https://github.com/docker/compose/issues/2847). I don't recommend using it 'as is' unless you are really desperate.
 
 ```go
-dnscache.ReplaceDockerDns("127.0.0.1") // 127.0.0.1 being your resolver address
+dnscache.ReplaceDockerDns(resolver.ListenAddr())
 ```
