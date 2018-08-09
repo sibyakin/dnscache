@@ -67,6 +67,7 @@ func NewResolver(host string, port int, opts ...ResolverOption) *Resolver {
 }
 
 // Start runs tcp/udp listeners and cache updating goroutine.
+//
 // Keep in mind that this call doesn't block.
 func (r *Resolver) Start() error {
 
@@ -321,7 +322,9 @@ func (r *Resolver) forward(proto string, msg *dns.Msg) (*dns.Msg, error) {
 
 // ReplaceDockerDNS edits /etc/resolv.conf, replacing lines containing
 // nameserver 127.0.0.11 (which is docker internal resolver address) with given address.
+//
 // https://github.com/docker/compose/issues/2847
+//
 // It has very limited use cases, so I don't recommend to use it.
 func ReplaceDockerDNS(addr string) error {
 	input, err := ioutil.ReadFile("/etc/resolv.conf")

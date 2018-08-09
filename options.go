@@ -11,6 +11,7 @@ import (
 type ResolverOption func(*Resolver)
 
 // WithUpstream sets upstream server to forward requests to.
+//
 // Default is 127.0.0.11 (docker internal resolver).
 func WithUpstream(addr string, port int) ResolverOption {
 	return func(r *Resolver) {
@@ -20,6 +21,7 @@ func WithUpstream(addr string, port int) ResolverOption {
 
 // WithDialTimeout sets timeout for net.Dial used to forward
 // queries over TCP.
+//
 // Default is 5s.
 func WithDialTimeout(timeout time.Duration) ResolverOption {
 	return func(r *Resolver) {
@@ -41,6 +43,7 @@ func WithCacheUpdateInterval(interval time.Duration) ResolverOption {
 }
 
 // WithCacheTTL sets time after which whole cache entry will be deleted.
+//
 // Default is 30m.
 func WithCacheTTL(ttl time.Duration) ResolverOption {
 	return func(r *Resolver) {
@@ -51,6 +54,7 @@ func WithCacheTTL(ttl time.Duration) ResolverOption {
 }
 
 // WithConcurrencyLimiter allows you to set maximum number of concurrent queries.
+//
 // This also affects cache updates.
 func WithConcurrencyLimiter(limit int) ResolverOption {
 	return func(r *Resolver) {
@@ -71,7 +75,9 @@ func WithConcurrencyLimiter(limit int) ResolverOption {
 }
 
 // WithCacheTypes sets query types that should be cached.
+//
 // You can set records using miekg/dns types (dns.TypeA, dns.TypeMX, etc.)
+//
 // By default only A and AAAA records are cached.
 func WithCacheTypes(qtypes ...uint16) ResolverOption {
 	return func(r *Resolver) {
